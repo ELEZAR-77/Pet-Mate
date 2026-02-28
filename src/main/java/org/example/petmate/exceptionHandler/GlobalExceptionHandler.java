@@ -1,11 +1,7 @@
 package org.example.petmate.exceptionHandler;
 
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.example.petmate.dto.NotFoundErrorDto;
+import org.example.petmate.dto.ServerResponseDto;
 import org.example.petmate.dto.ValidationErrorResponse;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -49,15 +45,30 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<NotFoundErrorDto> handleNotFoundError(
+    public ResponseEntity<ServerResponseDto> handleNotFoundError(
             NoSuchElementException ex
     ) {
         log.info("Got no such element exception ", ex);
 
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(new NotFoundErrorDto(
+                .body(new ServerResponseDto(
                         "Not found error",
+                        ex.getMessage(),
+                        LocalDateTime.now()
+                ));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ServerResponseDto> handleIllegalArgumentExceptionError(
+            IllegalArgumentException ex
+    ) {
+        log.info("Got illegal argument exception ", ex);
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ServerResponseDto(
+                        "Argument error",
                         ex.getMessage(),
                         LocalDateTime.now()
                 ));

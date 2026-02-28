@@ -2,7 +2,7 @@ package org.example.petmate.dto;
 
 import java.time.LocalDateTime;
 
-public record NotFoundErrorDto (
+public record ServerResponseDto(
     String message,
     String detailedMessage,
     LocalDateTime localDateTime
