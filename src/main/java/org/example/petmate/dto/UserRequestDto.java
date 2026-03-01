@@ -2,10 +2,12 @@ package org.example.petmate.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
 @Data
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserRequestDto {
     @NotBlank
@@ -17,7 +19,7 @@ public class UserRequestDto {
     private String email;
 
     @NotNull
-    @Max(20)
+    @Max(100)
     @Min(6)
     private Integer age;
 

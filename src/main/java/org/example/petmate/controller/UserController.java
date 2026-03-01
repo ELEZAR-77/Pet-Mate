@@ -93,7 +93,7 @@ public class UserController {
                     description = "Пользователь не найден"
             )
     })
-    public ResponseEntity<User> updateUser(
+    public ResponseEntity<User> updateUserById(
             @PathVariable Long id,
             @Valid @RequestBody UserRequestDto request
     ) {
