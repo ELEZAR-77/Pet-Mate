@@ -14,7 +14,7 @@ public class User {
     private String name;
     private String email;
     private Integer age;
-    private List<Pet> pets;
+    private List<Pet> pets = new ArrayList<>();
 
 
     public void addPet(Pet pet) {
@@ -26,6 +26,5 @@ public class User {
         this.name = name;
         this.email = email;
         this.age = age;
-        this.pets = new ArrayList<>();
     }
 }

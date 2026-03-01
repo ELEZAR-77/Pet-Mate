@@ -51,9 +51,6 @@ public class UserControllerTest {
 
         var userResponse = objectMapper.readValue(userCreateRequest, User.class);
 
-        if (userResponse.getId() == null) {
-            System.out.println(userResponse);
-        }
 
         Assertions.assertNotNull(userResponse.getId());
         Assertions.assertEquals(testUser.getName(), userResponse.getName());
@@ -150,7 +147,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void shouldNotUpdateUserByIdWhenUserNotFount() throws Exception {
+    void shouldNotUpdateUserByIdWhenUserNotFound() throws Exception {
 
         testUser.setName("ChangeName");
         testUser.setEmail("change@mail.com");
