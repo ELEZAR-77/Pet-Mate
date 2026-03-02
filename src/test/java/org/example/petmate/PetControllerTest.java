@@ -91,9 +91,17 @@ public class PetControllerTest {
         var pet = petService.createPet(user.getId(), testPet);
 
 
-        mockMvc.perform(
+        String petRequestJson = mockMvc.perform(
                 get("/users/{petId}/pets", pet.getId())
-        ).andExpect(status().isOk());
+        )
+                .andExpect(status().isOk())
+                        .andReturn()
+                                .getResponse()
+                                        .getContentAsString();
+
+        org.assertj.core.api.Assertions.assertThat(pet)
+                .usingRecursiveComparison()
+                .isEqualTo(objectMapper.readValue(petRequestJson, Pet.class));
 
         userService.deleteUserById(user.getId());
     }
